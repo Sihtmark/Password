@@ -7,7 +7,11 @@
 
 import UIKit
 
-class PasswordTextField: UIView, UITextFieldDelegate {
+protocol PasswordTextFieldDelegate: AnyObject {
+    func editingChanged(_ sender: PasswordTextField)
+}
+
+class PasswordTextField: UIView {
     
     let lockImageView = UIImageView(image: UIImage(systemName: "lock.fill"))
     let textField = UITextField()
@@ -15,6 +19,8 @@ class PasswordTextField: UIView, UITextFieldDelegate {
     let eyeButton = UIButton(type: .custom)
     let dividerView = UIView()
     let errorLabel = UILabel()
+    
+    weak var delegate: PasswordTextFieldDelegate? // weak - to avoid retain circles
     
     init(placeHolderText: String) {
         self.placeHolderText = placeHolderText
@@ -37,16 +43,20 @@ class PasswordTextField: UIView, UITextFieldDelegate {
 extension PasswordTextField {
     func style() {
         translatesAutoresizingMaskIntoConstraints = false
-//        backgroundColor = .systemOrange
+        backgroundColor = .systemOrange
         
         lockImageView.translatesAutoresizingMaskIntoConstraints = false
         
+ 
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.isSecureTextEntry = false
         textField.placeholder = placeHolderText
         textField.delegate = self
         textField.keyboardType = .asciiCapable
         textField.attributedPlaceholder = NSAttributedString(string: placeHolderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel])
+        
+        // extra interaction
+        textField.addTarget(self, action: #selector(textfieldEditingChanged), for: .editingChanged)
         
         eyeButton.translatesAutoresizingMaskIntoConstraints = false
         eyeButton.setImage(UIImage(systemName: "eye.circle"), for: .normal)
@@ -62,7 +72,7 @@ extension PasswordTextField {
         errorLabel.text = "Your password must meet the requirements below"
         errorLabel.numberOfLines = 0
         errorLabel.lineBreakMode = .byWordWrapping
-        errorLabel.isHidden = false // true
+        errorLabel.isHidden = true
     }
     
     func layout() {
@@ -91,11 +101,6 @@ extension PasswordTextField {
             eyeButton.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        // CHCR
-        lockImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
-        eyeButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-        
         // divider
         NSLayoutConstraint.activate([
             dividerView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -110,12 +115,28 @@ extension PasswordTextField {
             errorLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             errorLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+        
+        // CHCR
+        lockImageView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        textField.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+        eyeButton.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
     }
 }
 
+//MARK: - Actions
 extension PasswordTextField {
     @objc func togglePasswordView(_ sender: Any) {
         textField.isSecureTextEntry.toggle()
         eyeButton.isSelected.toggle()
     }
+    
+    @objc func textfieldEditingChanged(_ sender: UITextField) {
+        delegate?.editingChanged(self)
+    }
 }
+
+//MARK: - UITextfieldDelegate
+extension PasswordTextField: UITextFieldDelegate {
+    
+}
+

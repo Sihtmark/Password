@@ -64,7 +64,6 @@ extension PasswordCriteriaView {
         imageView.image = UIImage(systemName: "circle")!.withTintColor(.tertiaryLabel, renderingMode: .alwaysOriginal)
         
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "uppercase letter (A-Z)"
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         label.textColor = .secondaryLabel
     }
@@ -92,3 +91,4 @@ extension PasswordCriteriaView {
         label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
     }
 }
+
