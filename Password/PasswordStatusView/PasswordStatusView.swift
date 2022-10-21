@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class PasswordStatusView: UIView {
-    
     let stackView = UIStackView()
     
     let criteriaLabel = UILabel()
@@ -20,7 +19,7 @@ class PasswordStatusView: UIView {
     let digitCriteriaView = PasswordCriteriaView(text: "digit (0-9)")
     let specialCharacterCriteriaView = PasswordCriteriaView(text: "special character (e.g. !@#$%^)")
     
-    // Used to determine if we reset criteria back to empty space (⚪️)
+    // Used to determine if we reset criteria back to empty state (⚪️).
     var shouldResetCriteria: Bool = true
     
     override init(frame: CGRect) {
@@ -50,15 +49,15 @@ extension PasswordStatusView {
         stackView.spacing = 8
         stackView.distribution = .equalCentering
         
+        criteriaLabel.numberOfLines = 0
+        criteriaLabel.lineBreakMode = .byWordWrapping
+        criteriaLabel.attributedText = makeCriteriaMessage()
+        
         lengthCriteriaView.translatesAutoresizingMaskIntoConstraints = false
         uppercaseCriteriaView.translatesAutoresizingMaskIntoConstraints = false
         lowerCaseCriteriaView.translatesAutoresizingMaskIntoConstraints = false
         digitCriteriaView.translatesAutoresizingMaskIntoConstraints = false
         specialCharacterCriteriaView.translatesAutoresizingMaskIntoConstraints = false
-        
-        criteriaLabel.numberOfLines = 0
-        criteriaLabel.lineBreakMode = .byWordWrapping
-        criteriaLabel.attributedText = makeCriteriaMessage()
     }
     
     func layout() {
@@ -69,10 +68,9 @@ extension PasswordStatusView {
         stackView.addArrangedSubview(digitCriteriaView)
         stackView.addArrangedSubview(specialCharacterCriteriaView)
         
-        
-        
         addSubview(stackView)
         
+        // Stack layout
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalToSystemSpacingBelow: topAnchor, multiplier: 2),
             stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 2),
@@ -98,6 +96,7 @@ extension PasswordStatusView {
     }
 }
 
+// MARK: Actions
 extension PasswordStatusView {
     func updateDisplay(_ text: String) {
         let lengthAndNoSpaceMet = PasswordCriteria.lengthAndNoSpaceMet(text)
@@ -140,11 +139,20 @@ extension PasswordStatusView {
     func validate(_ text: String) -> Bool {
         let uppercaseMet = PasswordCriteria.uppercaseMet(text)
         let lowercaseMet = PasswordCriteria.lowercaseMet(text)
-        let digitmet = PasswordCriteria.digitMet(text)
+        let digitMet = PasswordCriteria.digitMet(text)
         let specialCharacterMet = PasswordCriteria.specialCharacterMet(text)
         
-        let arr = [uppercaseMet, lowercaseMet, digitmet, specialCharacterMet]
-        return arr.filter{$0}.count >= 3
+        // Ready Player1 🕹
+        // Check for 3 of 4 criteria here...
+        let checkable = [uppercaseMet, lowercaseMet, digitMet, specialCharacterMet]
+        let metCriteria = checkable.filter { $0 }
+        let lengthAndNoSpaceMet = PasswordCriteria.lengthAndNoSpaceMet(text)
+        
+        if lengthAndNoSpaceMet && metCriteria.count >= 3 {
+            return true
+        }
+        
+        return false
     }
     
     func reset() {

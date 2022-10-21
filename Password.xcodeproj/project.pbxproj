@@ -15,6 +15,7 @@
 		A077405F28FAFF1000857026 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A077405E28FAFF1000857026 /* ViewController.swift */; };
 		A077406428FAFF1200857026 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A077406328FAFF1200857026 /* Assets.xcassets */; };
 		A077406728FAFF1200857026 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A077406528FAFF1200857026 /* LaunchScreen.storyboard */; };
+		A0DAADDE2902A0B900181549 /* UIResponder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DAADDD2902A0B900181549 /* UIResponder+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A077406328FAFF1200857026 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A077406628FAFF1200857026 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A077406828FAFF1200857026 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0DAADDD2902A0B900181549 /* UIResponder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,8 +46,8 @@
 		A024C6D328FD480B0039B439 /* PasswordStatusView */ = {
 			isa = PBXGroup;
 			children = (
-				A024C6D428FD486B0039B439 /* PasswordCriteriaView.swift */,
 				A024C6D628FD701E0039B439 /* PasswordStatusView.swift */,
+				A024C6D428FD486B0039B439 /* PasswordCriteriaView.swift */,
 				A0377C6428FFEBEB0088939E /* PasswordCriteria.swift */,
 			);
 			path = PasswordStatusView;
@@ -74,6 +76,7 @@
 				A077405E28FAFF1000857026 /* ViewController.swift */,
 				A053AA5828FC168E00C6E00F /* PasswordTextField.swift */,
 				A024C6D328FD480B0039B439 /* PasswordStatusView */,
+				A0DAADDC2902A08A00181549 /* Utils */,
 				A077406E28FAFFE300857026 /* Files */,
 			);
 			path = Password;
@@ -87,6 +90,14 @@
 				A077406328FAFF1200857026 /* Assets.xcassets */,
 			);
 			name = Files;
+			sourceTree = "<group>";
+		};
+		A0DAADDC2902A08A00181549 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A0DAADDD2902A0B900181549 /* UIResponder+Utils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A077405F28FAFF1000857026 /* ViewController.swift in Sources */,
+				A0DAADDE2902A0B900181549 /* UIResponder+Utils.swift in Sources */,
 				A0377C6528FFEBEB0088939E /* PasswordCriteria.swift in Sources */,
 				A077405B28FAFF1000857026 /* AppDelegate.swift in Sources */,
 				A024C6D528FD486B0039B439 /* PasswordCriteriaView.swift in Sources */,
@@ -310,6 +322,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,6 +350,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
