@@ -145,7 +145,7 @@ extension PasswordStatusView {
         // Ready Player1 🕹
         // Check for 3 of 4 criteria here...
         let checkable = [uppercaseMet, lowercaseMet, digitMet, specialCharacterMet]
-        let metCriteria = checkable.filter { $0 }
+        let metCriteria = checkable.filter{$0}
         let lengthAndNoSpaceMet = PasswordCriteria.lengthAndNoSpaceMet(text)
         
         if lengthAndNoSpaceMet && metCriteria.count >= 3 {
@@ -161,5 +161,21 @@ extension PasswordStatusView {
         lowerCaseCriteriaView.reset()
         digitCriteriaView.reset()
         specialCharacterCriteriaView.reset()
+    }
+}
+
+//MARK: Tests
+
+extension PasswordCriteriaView {
+    var isCheckmarkImage: Bool {
+        return imageView.image == checkmarkImage
+    }
+    
+    var isXmarkImage: Bool {
+        return imageView.image == xmarkImage
+    }
+    
+    var isResetImage: Bool {
+        return imageView.image == circleImage
     }
 }
